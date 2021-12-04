@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 public class WorldTraveller : MonoBehaviour
 {
     public string spawnLocation = null;
-
+    public UnityEvent onEnterEncounterEvent;
+    public UnityEvent onExitEncounterEvent;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,10 +46,21 @@ public class WorldTraveller : MonoBehaviour
     }
     public void EnterEncounter()
     {
+        StartCoroutine(BattleEntrySequence());
+        
+        onEnterEncounterEvent.Invoke();
+        //gameObject.SetActive(false);
+    }
+    IEnumerator BattleEntrySequence()
+    {
+        onEnterEncounterEvent.Invoke();
+        yield return new WaitForSeconds(3);
         SceneManager.LoadScene("EncounterScene");
     }
     public void ExitEncounter()
     {
         SceneManager.LoadScene("Overworld");
+        onExitEncounterEvent.Invoke();
+        //gameObject.SetActive(true);
     }
 }

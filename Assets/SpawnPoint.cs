@@ -10,7 +10,7 @@ public class SpawnPoint : MonoBehaviour
     static PlayerBehaviour player = null;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if(player == null)
         {

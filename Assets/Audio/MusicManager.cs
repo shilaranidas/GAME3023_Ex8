@@ -36,9 +36,35 @@ public class MusicManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        WorldTraveller traveller = FindObjectOfType<WorldTraveller>();
+        traveller.onEnterEncounterEvent.AddListener(onEnterEncounterHandler);
+        traveller.onEnterEncounterEvent.AddListener(onExitEncounterHandler);
         Instance.PlayTrack(TrackID.Overworld);
     }
-
+    private void onEnterEncounterHandler()
+    {
+        PlayTrack(TrackID.Battle);
+    }
+    private void onExitEncounterHandler()
+    {
+        StartCoroutine(FadeInTrackOverDuration(TrackID.Overworld,1.0f));
+        
+    }
+    IEnumerator FadeInTrackOverDuration(TrackID track,float duration)
+    {
+        PlayTrack(track);
+        float timer=0.0f;
+        while(timer<duration)
+        {
+            timer += Time.deltaTime;
+            float fadeValue = timer / duration;
+            musicSource.volume = Mathf.SmoothStep(0.0f,1.0f, fadeValue);
+            yield return new WaitForEndOfFrame();
+        }
+        
+       
+       
+    }
     // Update is called once per frame
     void Update()
     {
