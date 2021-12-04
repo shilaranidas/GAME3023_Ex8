@@ -27,6 +27,7 @@ public class EncounterInstance : MonoBehaviour
     {
         currentCharacter = player;
         player.onAbilityCast.AddListener(OnAbilityCastCallback);
+        MusicManager.Instance.PlayTrack(MusicManager.TrackID.Battle);
     }
     public void OnAbilityCastCallback(Ability casted)
     {
