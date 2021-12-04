@@ -43,7 +43,8 @@ public class MusicManager : MonoBehaviour
     }
     private void onEnterEncounterHandler()
     {
-        PlayTrack(TrackID.Battle);
+        //PlayTrack(TrackID.Battle);
+        StartCoroutine(FadeInTrackOverDuration(TrackID.Battle, 1.0f));
     }
     private void onExitEncounterHandler()
     {
@@ -61,9 +62,6 @@ public class MusicManager : MonoBehaviour
             musicSource.volume = Mathf.SmoothStep(0.0f,1.0f, fadeValue);
             yield return new WaitForEndOfFrame();
         }
-        
-       
-       
     }
     // Update is called once per frame
     void Update()
