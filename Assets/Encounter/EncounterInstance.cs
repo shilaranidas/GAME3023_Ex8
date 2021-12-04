@@ -34,6 +34,7 @@ public class EncounterInstance : MonoBehaviour
     }
     public void AdvancedTurns()
     {
+        turnNumber++;
         if(currentCharacter==player)
         {
             currentCharacter = enemy;
@@ -58,5 +59,9 @@ public class EncounterInstance : MonoBehaviour
     void Update()
     {
         
+    }
+    public void EndBattle()
+    {
+        FindObjectOfType<WorldTraveller>().ExitEncounter();
     }
 }
