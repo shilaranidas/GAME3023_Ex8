@@ -13,6 +13,7 @@ public class Ability : ScriptableObject
 
     [SerializeField] 
     private IEffect[] effects;
+    
 
     public void Cast(ICharacter self, ICharacter other)
     {
@@ -20,6 +21,7 @@ public class Ability : ScriptableObject
         foreach (IEffect effect in effects)
         {
             effect.ApplyEffect(self, other);
+           
         }
         self.onAbilityCast.Invoke(this);
         
